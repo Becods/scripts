@@ -88,10 +88,23 @@ for i in $ips;do IP="IP:"$i",";done
 mkdir -p /etc/docker/cert
 cd /etc/docker/cert
 echo -e "${Info}正在安装运行环境"
-apt-get install curl -y -qqq
+apt-get install -y -q ca-certificates curl gnupg lsb-release
 echo -e >&3 "${Info}正在确认服务器位置"
-if [[ -n `curl -s http://www.geoplugin.net/json.gp|grep Asia` ]]; then 
+if [[ -n `curl -s http://www.geoplugin.net/json.gp|grep China` ]]; then
 	UseMirror="yes"
+fi
+if ! command -v docker >/dev/null 2>&1; then
+	echo -e "${Info}检测到未安装Docker，即将为你安装"
+	if [[ "$UseMirror" = "yes"  ]];then
+		curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | apt-key add -
+		echo "deb https://mirrors.ustc.edu.cn/docker-ce/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+	else
+		curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+		echo "deb https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+	fi
+	echo -e "${Info}正在安装Docker"
+	apt-get update -qqq
+	apt-get install docker-ce docker-ce-cli containerd.io docker-compose -y -q
 fi
 
 if [ -f "/etc/docker/daemon.json" ]; then
@@ -99,7 +112,7 @@ if [ -f "/etc/docker/daemon.json" ]; then
 	echo -e "${Info}daemon.json备份成功"
 fi
 if [[ "$UseMirror" = "yes"  ]];then
-	echo -e "${Info}服务器位于亚洲，已为您自动配置就近镜像"
+	echo -e "${Info}服务器位于国内，已为您自动配置就近镜像"
 	cat << EOF > /etc/docker/daemon.json
 {
 	"registry-mirrors": [
