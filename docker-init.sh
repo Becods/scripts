@@ -25,7 +25,6 @@ echo -e "$ips"
 read ipc
 case "$ipc" in
 	Y|y|yes)echo -e "${Info}请输入你的IP，使用空格作为分隔符" && read ips;;
-	*)break;;
 esac
 }
 
