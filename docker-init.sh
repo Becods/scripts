@@ -24,10 +24,8 @@ echo -e "${Info}这些是你将要允许远程管理的IP吗，请注意，不�
 echo -e "$ips"
 read ipc
 case "$ipc" in
-	Y)echo -e "${Info}请输入你的IP，使用空格作为分隔符" && read ips;;
-	y)echo -e "${Info}请输入你的IP，使用空格作为分隔符" && read ips;;
-	yes)echo -e "${Info}请输入你的IP，使用空格作为分隔符" && read ips;;
-	*)Input;;
+	Y|y|yes)echo -e "${Info}请输入你的IP，使用空格作为分隔符" && read ips;;
+	*)break;;
 esac
 }
 
