@@ -22,8 +22,8 @@ Input(){
 checkip(){
 echo -e "${Info}这些是你将要允许远程管理的IP吗，请注意，不在此列表内的IP将无法进行远程管理（不是客户端，是docker端绑定的IP） Y/n"
 echo -e "$ips"
-read ips
-case "$ips" in
+read ipc
+case "$ipc" in
 	Y)echo -e "${Info}请输入你的IP，使用空格作为分隔符" && read ips;;
 	y)echo -e "${Info}请输入你的IP，使用空格作为分隔符" && read ips;;
 	yes)echo -e "${Info}请输入你的IP，使用空格作为分隔符" && read ips;;
