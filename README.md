@@ -1,6 +1,6 @@
 # scripts
 
 ```
-wget -O - https://raw.githubusercontent.com/Becods/scripts/master/init.sh | bash
-wget -O - https://raw.githubusercontent.com/Becods/scripts/master/docker-init.sh | bash
+wget -O init.sh https://raw.githubusercontent.com/Becods/scripts/master/init.sh | bash init.sh
+wget -O docker-init.sh https://raw.githubusercontent.com/Becods/scripts/master/docker-init.sh | bash docker-init.sh
 ```
