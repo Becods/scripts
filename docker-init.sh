@@ -113,8 +113,10 @@ if [[ "$UseMirror" = "yes"  ]];then
 	cat << EOF > /etc/docker/daemon.json
 {
 	"registry-mirrors": [
-		"https://docker.mirrors.ustc.edu.cn",
-		"https://hub-mirror.c.163.com"
+		"https://docker.mirrors.sjtug.sjtu.edu.cn",
+		"https://docker.nju.edu.cn",
+		"https://docker.m.daocloud.io",
+		"https://mirror.baidubce.com"
 	],
 	"tlsverify": true,
 	"tlscacert": "/etc/docker/cert/ca.pem",
